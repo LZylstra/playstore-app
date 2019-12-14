@@ -12,6 +12,9 @@ app.get('/apps', (req, res) => {
     const {genres = "", sort} = req.query;
     let lowercase = genres.toLowerCase();
 
+    //uppercase the first letter for sort
+
+
     if (sort){
         if (!['rating', 'app'].includes(sort)){
             return res
@@ -30,8 +33,15 @@ app.get('/apps', (req, res) => {
         app.Genres.toLowerCase().includes(genres.toLowerCase()));
     
     if (sort){
+        //uppercase the first letter for sort needed for data
+        const upperFirst = sort.charAt(0).toUpperCase() + sort.substring(1);
         results.sort((a, b) => {
-            return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0;
+            // console.log(`A: ${a[upperFirst]}`)
+            // console.log(`B: ${b[upperFirst]}`)
+
+            let sortResult = a[upperFirst] > b[upperFirst] ? 1 : a[upperFirst] < b[upperFirst] ? -1 : 0;
+            // console.log(`Result: ${sortResult}`)
+            return sortResult;
         });
     }
   res  
