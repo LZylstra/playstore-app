@@ -12,11 +12,10 @@ app.get('/apps', (req, res) => {
     const {genres = "", sort} = req.query;
     let lowercase = genres.toLowerCase();
 
-    //uppercase the first letter for sort
 
 
     if (sort){
-        if (!['rating', 'app'].includes(sort)){
+        if (!['rating', 'app', 'Rating', 'App'].includes(sort)){
             return res
                 .status(400)
                 .send('Sort must be one of rating or app');
@@ -48,6 +47,4 @@ app.get('/apps', (req, res) => {
     .json(results);
 });
 
-app.listen(8000, () => {
-  console.log('Server started on PORT 8000');
-});
+module.exports = app;
